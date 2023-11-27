@@ -1,1 +1,1 @@
-# cid-gentrification
+# Gentrification in Seattle's Chinatown-International District (CID)
