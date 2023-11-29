@@ -16,7 +16,7 @@ fs.readFile(builtUnitsFile, 'utf8', (err, data) => {
                             'COMMENTS', 'APP_DATE', 'ISS_DATE', 'YEAR_ISSUED', 'VILLNUMB',
                             'NAME', 'TYPE_NAME', 'COMP_PLAN_NAME', 'COMP_PLAN_TYPE', 'CRA_NO',
                             'CRA', 'SOURCE', 'MAF_ID', 'DEVSITE_ID', 'RECORDNUMBER', 'STATUS_COLOR',
-                            'EXPIRE_DATE', 'ZONING_FULL', 'ZONING_PRIMARY', 'ZONING_REPORT',
+                            'FINAL_DATE', 'EXPIRE_DATE', 'ZONING_FULL', 'ZONING_PRIMARY', 'ZONING_REPORT',
                             'CATEGORY', 'CONSTR_PRMT_PARENT', 'Q_ISSUED', 'Q_Y_ISSUED', 'Q_FINAL',
                             'Q_Y_FINAL', 'INSPECTION_DATE', 'INSPECTION_TYPE'
                         ]
