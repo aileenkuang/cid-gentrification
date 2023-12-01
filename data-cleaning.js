@@ -11,7 +11,7 @@ fs.readFile(builtUnitsFile, 'utf8', (err, data) => {
 
     const builtUnitsData = JSON.parse(data);
 
-    function cleanGeoJSON(data) {
+    function deleteUnecessaryProperties(data) {
         var unneccesaryProperties = ['LOT_SIZE', 'PRMT_NR', 'MUP_APNO', 'STGLSTTITL', 'SLEEPING_ROOMS',
                             'COMMENTS', 'APP_DATE', 'ISS_DATE', 'YEAR_ISSUED', 'VILLNUMB',
                             'NAME', 'TYPE_NAME', 'COMP_PLAN_NAME', 'COMP_PLAN_TYPE', 'CRA_NO',
@@ -28,14 +28,19 @@ fs.readFile(builtUnitsFile, 'utf8', (err, data) => {
         return data
     }
 
-    const cleanedBuiltUnitsData = cleanGeoJSON(builtUnitsData)
+    function deleteDuplicateEntries(data) {
+        
+    }
+
+    const cleanedBuiltUnitsData = deleteUnecessaryProperties(builtUnitsData)
 
     const cleanedDataString = JSON.stringify(cleanedBuiltUnitsData, null, 2);
+    
     fs.writeFile('assets/built-units-since-2010.geojson', cleanedDataString, (writeErr) => {
         if (writeErr) {
             console.error('Error writing cleaned GeoJSON file:', writeErr);
         } else {
-            console.log('GeoJSON file cleaned and daved successfully.');
+            console.log('GeoJSON file cleaned and saved successfully.');
         }
     });
 })
