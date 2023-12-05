@@ -11,6 +11,7 @@ fs.readFile(builtUnitsFile, 'utf8', (err, data) => {
 
     const builtUnitsData = JSON.parse(data);
 
+    // Function to delete unecessary properties
     function deleteUnecessaryProperties(data) {
         var unneccesaryProperties = ['LOT_SIZE', 'PRMT_NR', 'MUP_APNO', 'STGLSTTITL', 'SLEEPING_ROOMS',
                             'COMMENTS', 'APP_DATE', 'ISS_DATE', 'YEAR_ISSUED', 'VILLNUMB',
@@ -53,11 +54,21 @@ fs.readFile(builtUnitsFile, 'utf8', (err, data) => {
         return data;
     }
 
+    // Function to convert values in specified column from string to int
+    function convertToInt(data, propertyName) {
+        data.features.forEach(feature => {
+            const valueAsString = feature.properties[propertyName];
+            const valueAsInt = parseInt(valueAsString, 10);
+            feature.properties[propertyName] = valueAsInt;
+        })
+        return data;
+    }
+
     const cleanedBuiltUnitsData = deleteUnecessaryProperties(builtUnitsData)
     const dataWithoutDuplicates = deleteDuplicateEntries(cleanedBuiltUnitsData, 
         "ADDRESS", "YEAR", "APTYPE")
-
-    const cleanedDataString = JSON.stringify(dataWithoutDuplicates, null, 2);
+    const yearAsString = convertToInt(dataWithoutDuplicates, "YEAR_FINAL")
+    const cleanedDataString = JSON.stringify(yearAsString, null, 2);
     
     fs.writeFile('assets/built-units-since-2010.geojson', cleanedDataString, (writeErr) => {
         if (writeErr) {
