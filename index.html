@@ -18,6 +18,7 @@
             .topnav {
                 background-color: slategray;
                 overflow: hidden;
+                width: fit-content;
                 display: inline-block;
             }
 
@@ -32,7 +33,11 @@
             }
 
             .session {
-                margin-bottom: 20px;
+                margin-bottom: 40px;
+            }
+
+            #sliderbar {
+                margin-top: 20px;
             }
 
             .row {
@@ -71,7 +76,7 @@
 
             a {
                 text-decoration: none;
-                color: #2dc4b2
+                color: cornflowerblue;
             }
 
             #console {
@@ -80,6 +85,7 @@
                 margin: 10px;
                 padding: 10px 20px;
                 background-color: white;
+                border: black;
             }
         </style>
     </head>
@@ -106,14 +112,12 @@
                     <div class="label">398</div>
                     <div class="label">680+</div>
                 </div>
-            </div>
 
-            <div class="session" id="sliderbar">
-                <h2>Year: <label id="active-year">2010</label></h2>
-                <input id="slider" class="row" type="range" min="2010" max="2023" step="1" value="2010" />
-            </div>
+                <div id="sliderbar">
+                    <h2>Year: <label id="active-year">2010</label></h2>
+                    <input id="slider" class="row" type="range" min="2010" max="2023" step="1" value="2010" />
+                </div>
 
-            <div class="session">
                 <h2>Permit Type</h2>
                 <div class="row" id="filters">
                     <input id="all" type="radio" name="toggle" value="all" checked="checked">
