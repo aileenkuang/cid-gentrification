@@ -18,6 +18,7 @@
             .topnav {
                 background-color: slategray;
                 overflow: hidden;
+                display: inline-block;
             }
 
             .topnav a {
@@ -137,7 +138,7 @@
 
             map.on("load", () => {
                 let filterYear = ['==', ['number', ['get', 'YEAR_FINAL']], 2010];
-                 filterType = ['!=', ['string', ['get', 'APTYPE']], 'placeholder'];
+                let filterType = ['!=', ['string', ['get', 'APTYPE']], 'placeholder'];
 
                 map.addLayer({
                     id: "units",
@@ -183,7 +184,7 @@
                 document.getElementById("slider").addEventListener("input", (event) => {
                     const year = parseInt(event.target.value);
                     filterYear = ["==", ["number", ["get", "YEAR_FINAL"]], year]
-                    map.setFilter("units", ['all', filterYear, filterDay]);
+                    map.setFilter("units", ['all', filterYear, filterType]);
                     document.getElementById("active-year").innerText = year;
                 });
 
@@ -192,9 +193,9 @@
                     if (permitType === "all") {
                         filterType = ["!=", ["string", ["get", "APTYPE"]], "placeholder"];
                     } else if (permitType === "demolition") {
-                        filterType = ["match", ["get", "APTYPE"], ["Demolition Permit"], true];
+                        filterType = ["match", ["get", "APTYPE"], ["Demolition Permit"], true, false];
                     } else if (permitType === "construction") {
-                        filterType = ["match", ["get", "APTYPE"], ["Construction Permit"], true];
+                        filterType = ["match", ["get", "APTYPE"], ["Construction Permit"], true, false];
                     } else {
                         console.log("error")
                     }
