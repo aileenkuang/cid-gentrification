@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Gentrification in Seattle</title>
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+        <style>
+        </style>
+    </head>
+
+    <body>
+        <div class="topnav" id="header">
+            <a class="active" href="index.html">Built Units Map</a>
+        </div>
+
+        <div id="map"></div>
+
+        <div id="console">
+            <h1>Constructed and Demolished Units in Seattle Since 2010</h1>
+            <p>Data: <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::built-units-since-2010/explore?location=47.614405%2C-122.330455%2C12.00&showTable=true">
+                Built residential units in Seattle since 2010</a></p>
+            
+            
+
+            <!-- User selects the year they would like to view. Initial year is 2011. -->
+            <div id="sliderbar">
+                <h2>Year: <label id="active-year">2010</label></h2>
+                <input id="slider" class="row" type="range" min="2011" max="2023" step="1" value="2011" />
+            </div>
+        </div>
+
+        <div id="legend">
+            <!-- Non-static legend, where title and key updates depending on the permit type selected-->
+        </div>
+
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWlsZWVua3VhbmciLCJhIjoiY2xwaWprYW94MDAyYTJ1bzVnNjV1em1oNCJ9.uKsDYlCnCLHdsfwbNLZRag'
+
+            const map = new mapboxgl.Map({
+                container: "map",
+                style: "mapbox://styles/aileenkuang/clpiikuuw006s01pqhvq13c2h",
+                center: [-122.335167, 47.608013],
+                zoom: 10.5
+            });
+
+            map.on("load", () => {
+                
+            })
+        </script>
+    </body>
+</html>

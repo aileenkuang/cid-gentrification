@@ -12,14 +12,16 @@
             body {
                 margin: 0;
                 padding: 0;
-                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
             }
 
             .topnav {
                 background-color: slategray;
                 overflow: hidden;
-                width: fit-content;
+                width: 100%;
                 display: inline-block;
+                z-index: 1;
+                position: relative;
             }
 
             .topnav a {
@@ -46,12 +48,12 @@
             }
 
             .colors {
-                background: linear-gradient(to right, #2dc4b2, #3bb3c3, #669ec4, #8b88b6, #a2719b, #aa5e79);
+                background: linear-gradient(to right, "#edf8e9", "#bae4b3", "#74c476", "#238b45");
                 margin-bottom: 5px;
             }
 
             .label {
-                width: 15%;
+                width: 22%;
                 display: inline-block;
                 text-align: center;
             }
@@ -61,6 +63,7 @@
                 top: 0;
                 bottom: 0;
                 width: 100%;
+                z-index: 0;
             }
 
             h1 {
@@ -69,7 +72,7 @@
             }
 
             h2 {
-                font-size: 14px;
+                font-size: 20px;
                 line-height: 20px;
                 margin-bottom: 10px;
             }
@@ -92,40 +95,31 @@
 
     <body>
         <div class="topnav" id="header">
-            <a class="active" href="index.html">Map</a>
+            <a class="active" href="index.html">Built Units Map</a>
         </div>
 
         <div id="map"></div>
+
         <div id="console">
-            <h1>Built Units in Seattle Since 2010</h1>
+            <h1>Demolished Units in Seattle Since 2010</h1>
             <p>Data: <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::built-units-since-2010/explore?location=47.614405%2C-122.330455%2C12.00&showTable=true">
                 Built residential units in Seattle since 2010</a></p>
             
             <div class="session">
-                <h2>Net built units</h2>
+                <!-- Display legend -->
+                <h2>Net demolished units</h2>
                 <div class="row colors"></div>
                 <div class="row labels">
-                    <div class="label">-272</div>
-                    <div class="label">-174</div>
-                    <div class="label">45</div>
-                    <div class="label">175</div>
-                    <div class="label">398</div>
-                    <div class="label">680+</div>
+                    <div class="label">#</div>
+                    <div class="label">#</div>
+                    <div class="label">#</div>
+                    <div class="label">#</div>
                 </div>
 
+                <!-- Display slider. Intial year is 2011 -->
                 <div id="sliderbar">
-                    <h2>Year: <label id="active-year">2010</label></h2>
-                    <input id="slider" class="row" type="range" min="2010" max="2023" step="1" value="2010" />
-                </div>
-
-                <h2>Permit Type</h2>
-                <div class="row" id="filters">
-                    <input id="all" type="radio" name="toggle" value="all" checked="checked">
-                    <label for="all">All</label>
-                    <input id="demolition" type="radio" name="toggle" value="demolition">
-                    <label for="demolition">Demolished units</label>
-                    <input id="construction" type="radio" name="toggle" value="construction">
-                    <label for="construction">Constructed units</label>
+                    <h2>Year: <label id="active-year">2011</label></h2>
+                    <input id="slider" class="row" type="range" min="2011" max="2023" step="1" value="2011" />
                 </div>
             </div>
         </div>
@@ -141,11 +135,10 @@
             });
 
             map.on("load", () => {
-                let filterYear = ['==', ['number', ['get', 'YEAR_FINAL']], 2010];
-                let filterType = ['!=', ['string', ['get', 'APTYPE']], 'placeholder'];
+                let filterYear = ["==", ["number", ["get", "YEAR_FINAL"]], 2011];
 
                 map.addLayer({
-                    id: "units",
+                    id: "demo-units",
                     type: "circle",
                     source: {
                         type: "geojson",
@@ -155,58 +148,39 @@
                         "circle-radius": [
                             "interpolate",
                             ["linear"],
-                            ["number", ["get", "NET_UNITS"]],
+                            ["number", ["get", "DEMO"]],
                             0,
                             1,
-                            2,
-                            4,
-                            6,
-                            8
+                            5,
+                            9
                         ],
                         "circle-color": [
                             "interpolate",
                             ["linear"],
-                            ["number", ["get", "NET_UNITS"]],
-                            -272,
-                            "#2DC4B2",
-                            -174,
-                            "#3BB3C3",
-                            45,
-                            "#669EC4",
-                            175,
-                            "#8B88B6",
-                            398,
-                            "#A2719B",
-                            680,
-                            "#AA5E79"
+                            ["number", ["get", "DEMO"]],
+                            0,
+                            "#edf8e9",
+                            5,
+                            "#bae4b3",
+                            42,
+                            "#74c476",
+                            272,
+                            "#238b45"
                         ],
-                        "circle-opacity": 0.8,
+                        "circle-opacity": 0.9,
                     },
                 });
-                
-                map.setFilter("units", ["==", ["number", ["get", "YEAR_FINAL"]], 2010]);
+
+                map.setFilter("demo-units", ["==", ["number", ["get", "YEAR_FINAL"]], 2011]);
                 document.getElementById("slider").addEventListener("input", (event) => {
                     const year = parseInt(event.target.value);
-                    filterYear = ["==", ["number", ["get", "YEAR_FINAL"]], year]
-                    map.setFilter("units", ['all', filterYear, filterType]);
+                    filterYear = ["==", ["number", ["get", "YEAR_FINAL"]], year];
+                    map.setFilter("demo-units", ["all", filterYear]);
                     document.getElementById("active-year").innerText = year;
                 });
 
-                document.getElementById("filters").addEventListener("change", (event) => {
-                    const permitType = event.target.value;
-                    if (permitType === "all") {
-                        filterType = ["!=", ["string", ["get", "APTYPE"]], "placeholder"];
-                    } else if (permitType === "demolition") {
-                        filterType = ["match", ["get", "APTYPE"], ["Demolition Permit"], true, false];
-                    } else if (permitType === "construction") {
-                        filterType = ["match", ["get", "APTYPE"], ["Construction Permit"], true, false];
-                    } else {
-                        console.log("error")
-                    }
-                    map.setFilter("units", ["all", filterYear, filterType]);
-                });
-            });
+                map.setFilter("demo-units", ["all", filterYear])
+            })
         </script>
     </body>
-
 </html>
