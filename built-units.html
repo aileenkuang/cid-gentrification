@@ -34,6 +34,16 @@
                 font-size: 26px;
             }
 
+            .topnav a:hover {
+                background-color: #dddbf2ba;
+                color: gray;
+            }
+
+            .topnav a.active {
+                background-color: cornflowerblue;
+                color: white;
+            }
+
             .session {
                 margin-bottom: 20px;
             }
@@ -48,7 +58,7 @@
             }
 
             .colors {
-                background: linear-gradient(to right, #edf8fb, #b3cde3, #8c96c6, #8856a7, #810f7c);
+                background: linear-gradient(to right, #CAF0F8, #90E0EF, #00B4D8, #0077B6, #03045E);
                 margin-bottom: 5px;
             }
 
@@ -104,7 +114,7 @@
         <div id="console">
             <h1>Constructed Units in Seattle Since 2010</h1>
             <p>Data: <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::built-units-since-2010/explore?location=47.614405%2C-122.330455%2C12.00&showTable=true">
-                Built residential units in Seattle since 2010</a></p>
+                Built residential units in Seattle since 2010</a> from Seattle OpenData</p>
             
             <div class="session">
                 <!-- Display legend -->
@@ -163,15 +173,15 @@
                             ["linear"],
                             ["number", ["get", "NEW"]],
                             0,
-                            "#edf8fb",
+                            "#CAF0F8",
                             45,
-                            "#b3cde3",
+                            "#90E0EF",
                             175,
-                            "#8c96c6",
+                            "#00B4D8",
                             398,
-                            "#8856a7",
+                            "#0077B6",
                             680,
-                            "#810f7c"
+                            "#03045E"
                         ],
                         "circle-opacity": 0.9,
                     },

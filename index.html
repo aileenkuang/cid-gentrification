@@ -34,6 +34,16 @@
                 font-size: 26px;
             }
 
+            .topnav a:hover {
+                background-color: #dddbf2ba;
+                color: gray;
+            }
+
+            .topnav a.active {
+                background-color: cornflowerblue;
+                color: white;
+            }
+
             .session {
                 margin-bottom: 40px;
             }
@@ -48,7 +58,7 @@
             }
 
             .colors {
-                background: linear-gradient(to right, "#edf8e9", "#bae4b3", "#74c476", "#238b45");
+                background: linear-gradient(to right, #caf0f8, #90e0ef, #00b4d8, #0077b6);
                 margin-bottom: 5px;
             }
 
@@ -104,17 +114,17 @@
         <div id="console">
             <h1>Demolished Units in Seattle Since 2010</h1>
             <p>Data: <a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::built-units-since-2010/explore?location=47.614405%2C-122.330455%2C12.00&showTable=true">
-                Built residential units in Seattle since 2010</a></p>
+                Built residential units in Seattle since 2010</a> from Seattle OpenData</p>
             
             <div class="session">
                 <!-- Display legend -->
                 <h2>Net demolished units</h2>
                 <div class="row colors"></div>
                 <div class="row labels">
-                    <div class="label">#</div>
-                    <div class="label">#</div>
-                    <div class="label">#</div>
-                    <div class="label">#</div>
+                    <div class="label">0</div>
+                    <div class="label">5</div>
+                    <div class="label">42</div>
+                    <div class="label">272</div>
                 </div>
 
                 <!-- Display slider. Intial year is 2011 -->
@@ -152,7 +162,7 @@
                             ["number", ["get", "DEMO"]],
                             0,
                             1,
-                            5,
+                            3,
                             9
                         ],
                         "circle-color": [
@@ -160,15 +170,15 @@
                             ["linear"],
                             ["number", ["get", "DEMO"]],
                             0,
-                            "#edf8e9",
+                            "#CAF0F8",
                             5,
-                            "#bae4b3",
+                            "#90E0EF",
                             42,
-                            "#74c476",
+                            "#00B4D8",
                             272,
-                            "#238b45"
+                            "#0077B6"
                         ],
-                        "circle-opacity": 0.9,
+                        "circle-opacity": 1,
                     },
                 });
 
