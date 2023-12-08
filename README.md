@@ -24,8 +24,10 @@ This project utilizes the Mapbox GL JS API; it is built on the “Show changes o
 This project contains two maps: one displaying net demolished units in Seattle from 2011 to 2023 (Fig. 1), and one displaying net constructed units in Seattle from 2011 to 2023 (Fig. 2). There are two main interactive functions on this webpage; the user is able to toggle between the demolished and constructed units maps, and the user is able to utilize the slider in the console (located at the top left of the map) to display data for the year of their choice. Furthermore, the console contains a direct link to the data set used in the map as well as a map legend (which differs between the two maps).
 
 ![demolished units](images/demolished-units-ss.png)
+Figure 1: Screenshot of demolished units map with the year slider positioned at 2011.
 
 ![constructed units](images/constructed-units-ss.png)
+Fig. 2: Screenshot of constructed units map with the year slider positioned at 2011.
 
 From these maps, it can be seen that the number of both demolished and constructed units generally increases over time. Notably, the demolished units map shows us that there was a spike in demolitions from 2016-2017; after this, there seems to be a decrease in demolitions. On the other hand, the constructed units map demonstrates a continuous increase in built units over the past decade. Since we use demolition and construction as a signifier of gentrification, this suggests that Seattle has gentrified over the past decade. Moreover, in both maps, there seems to be a concentration of demolition and construction in the center of the city (around the Central District and downtown areas). The spatial distribution of demolished and constructed buildings shown here holds significance for community members and policymakers who are invested in the issue of gentrification. 
 
